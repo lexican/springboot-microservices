@@ -1,0 +1,25 @@
+server:
+  port: 8000
+  
+  
+zuul:
+ routes:
+   multiplication: /multiplications/**
+   gamification: /gamification/**
+
+hystrix:
+  command:
+    multiplication:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: ...
+
+myusers-service:
+  ribbon:
+    NIWSServerListClassName: com.netflix.loadbalancer.ConfigurationBasedServerList
+    listOfServers: http://localhost:8081
+    ConnectTimeout: 1000
+    ReadTimeout: 3000
+    MaxTotalHttpConnections: 500
+    MaxConnectionsPerHost: 100
